@@ -1,8 +1,6 @@
 import { Page } from '@playwright/test';
-import { WebComponent, createComponent } from '../../playwright/helpers';
-import { v10 } from '../../locators/templates';
-// import { WebComponent, createComponent } from '@playwright/helpers';
-// import { v10 } from '@locator/templates';
+import { WebComponent, createComponent } from 'helpers';
+import { v10 } from 'templates';
 
 export class LoginPage {
   page: Page;
@@ -11,6 +9,7 @@ export class LoginPage {
   loginButton: WebComponent;
 
   constructor(page: Page) {
+    this.page = page;
     this.username = createComponent(page, 'Username', v10.input('Username'));
     this.password = createComponent(page, 'Password', v10.input('Password'));
     this.loginButton = createComponent(page, 'Log In', v10.button('Log In'));

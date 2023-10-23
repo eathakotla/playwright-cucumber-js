@@ -1,5 +1,5 @@
-import { PlaywrightTestConfig, defineConfig, devices } from '@playwright/test';
-import { TestConfig } from './src/types';
+import { defineConfig, devices } from '@playwright/test';
+import { TestConfig } from './src/types/types';
 
 export const config: TestConfig = {
   playwrightConfig: defineConfig({

@@ -1,8 +1,8 @@
 import { test, Page } from '@playwright/test';
-import { PolicyCenterPages } from '../src/pages/policycenter/pages';
+import { PolicyCenterPages } from './pages/policycenter/pages';
 import { browser } from '../src/playwright/helpers';
 
-test('simple browser test', async ({ page }) => {
+test('simple browser test', async ({}) => {
   const myPage: Page = await browser.launchPage();
   let pc = new PolicyCenterPages(myPage);
   await myPage.goto('https://labs.zengwcloud.com/v10/pc/PolicyCenter.do');

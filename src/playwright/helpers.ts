@@ -1,5 +1,5 @@
 import { Browser, BrowserContextOptions, Locator, Page, PlaywrightTestConfig, Project, chromium, firefox, webkit } from '@playwright/test';
-import { BrowserInterface } from '../types';
+import { BrowserInterface } from '../types/types';
 import { config } from '../../test.config';
 
 interface Component {
@@ -82,8 +82,9 @@ export class WebComponent implements Component {
 
 export default class PlaywrightBrowser implements BrowserInterface {
   playwrightConfig: PlaywrightTestConfig;
-  browser: Browser;
-  page: Page;
+  browser: Browser | undefined;
+  page: Page | undefined;
+
   constructor() {
     this.playwrightConfig = config.playwrightConfig;
   }
@@ -99,7 +100,7 @@ export default class PlaywrightBrowser implements BrowserInterface {
   }
 
   async closePage(): Promise<void> {
-    await this.browser.close();
+    if (this.browser) await this.browser.close();
   }
 
   async getBrowser(): Promise<Browser> {

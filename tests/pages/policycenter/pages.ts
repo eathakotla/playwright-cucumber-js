@@ -5,8 +5,8 @@ import { NavigationBar } from './navigation.bar';
 export class PolicyCenterPages {
   page: Page;
   pages = new Map<string, any>();
-  private login: LoginPage;
-  private navigation: NavigationBar;
+  private login: LoginPage | undefined;
+  private navigation: NavigationBar | undefined;
 
   constructor(page: Page) {
     this.page = page;

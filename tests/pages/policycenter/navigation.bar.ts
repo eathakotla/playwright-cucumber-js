@@ -1,7 +1,7 @@
 import { Page } from '@playwright/test';
-import { WebComponent, createComponent } from '../../playwright/helpers';
-import { expect, expects } from '../../playwright/expects';
-import { v10 } from '../../locators/templates';
+import { WebComponent, createComponent } from 'helpers';
+import { expect, expects } from 'expects';
+import { v10 } from 'templates';
 
 export class NavigationBar {
   page: Page;
@@ -37,6 +37,7 @@ export class NavigationBar {
     this.administrationtabExpand = createComponent(page, 'Administration tab expand', v10.navTabExpand('Administration'));
     this.teamTab = createComponent(page, 'Team tab', v10.navTab('Team'));
     this.newAccountItem = createComponent(page, 'New Account', v10.navMenuItem(page, 'New Account'));
+    this.searchAccountInput = createComponent(page, 'Search Account button', '');
   }
 
   async validateTabs() {
