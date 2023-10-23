@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "baseUrl": "..",
+    "paths": {
+      "@playwright/helpers": ["src/playwright"],
+      "@locator/templates": ["src/locator"]
+    }
+  }
+}

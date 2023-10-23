@@ -1,0 +1,7 @@
+{
+  "terminal.integrated.fontFamily": "Martian Mono",
+  "terminal.integrated.fontSize": 12,
+  "editor.fontFamily": "'Martian Mono Semicondensed',Consolas, 'Courier New', monospace",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true
+}

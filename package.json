@@ -1,0 +1,31 @@
+{
+  "name": "learning_playwright_cucumber_ts",
+  "version": "1.0.0",
+  "description": "learning playwright cuucmber ts framework",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test-headed": "playwright test --headed",
+    "ui": "playwright test --ui",
+    "recorder": "playwright codegen",
+    "report": "npx playwright show-report",
+    "trace-test": "playwright test --trace on",
+    "prepare": "husky install"
+  },
+  "keywords": [
+    "cucumberjs",
+    "testing",
+    "typescript",
+    "playwright"
+  ],
+  "author": "simpleProgrammer",
+  "license": "ISC",
+  "dependencies": {
+    "@cucumber/cucumber": "^10.0.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.39.0",
+    "@types/node": "^20.8.7",
+    "husky": "^8.0.0"
+  }
+}
