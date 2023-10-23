@@ -9,6 +9,11 @@ interface Component {
   toString(): string;
 }
 
+type browserContainer = {
+  page: Page;
+  browser: Browser;
+};
+
 export class WebComponent implements Component {
   page: Page;
   locatorString: string;
@@ -146,6 +151,6 @@ const getComponents = (object: any): Map<string, WebComponent> => {
   return map;
 };
 
-const browser = new PlaywrightBrowser();
+const browserProvider = new PlaywrightBrowser();
 
-export { createComponent, getComponents, browser };
+export { createComponent, getComponents, browserProvider };

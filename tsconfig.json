@@ -19,7 +19,7 @@
     "strictPropertyInitialization": true,
     "baseUrl": "src/playwright",
     "paths": {
-      "@pages": ["./test/pages"],
+      "@pages": ["./tests/pages"],
       "@testdata": ["./tests/testdata"]
     },
     "declaration": false, // No need to generate declaration files (.d.ts) for a test project

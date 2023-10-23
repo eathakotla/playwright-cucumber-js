@@ -1,5 +1,6 @@
 import { Page } from '@playwright/test';
 import { WebComponent, createComponent } from 'helpers';
+import { getPage } from 'page-utils';
 import { v10 } from 'templates';
 
 export class LoginPage {
@@ -8,11 +9,11 @@ export class LoginPage {
   password: WebComponent;
   loginButton: WebComponent;
 
-  constructor(page: Page) {
-    this.page = page;
-    this.username = createComponent(page, 'Username', v10.input('Username'));
-    this.password = createComponent(page, 'Password', v10.input('Password'));
-    this.loginButton = createComponent(page, 'Log In', v10.button('Log In'));
+  constructor() {
+    this.page = getPage();
+    this.username = createComponent(this.page, 'Username', v10.input('Username'));
+    this.password = createComponent(this.page, 'Password', v10.input('Password'));
+    this.loginButton = createComponent(this.page, 'Log In', v10.button('Log In'));
   }
 
   async doLogin(usr: string, pwd: string) {

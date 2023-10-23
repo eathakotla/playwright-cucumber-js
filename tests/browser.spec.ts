@@ -1,14 +1,10 @@
-import { test, Page } from '@playwright/test';
 import { PolicyCenterPages } from './pages/policycenter/pages';
-import { browser } from '../src/playwright/helpers';
+import { test } from '../src/setup/customPageTest';
 
-test('simple browser test', async ({}) => {
-  const myPage: Page = await browser.launchPage();
-  let pc = new PolicyCenterPages(myPage);
-  await myPage.goto('https://labs.zengwcloud.com/v10/pc/PolicyCenter.do');
+test('simple browser test', async () => {
+  let pc = new PolicyCenterPages();
+  await pc.base().openPolicyCenter();
   await pc.loginPage().doLogin('su', 'Zens@r!lab');
   await pc.navigationBar().validateTabs();
   await pc.navigationBar().startNewAccount();
-  await myPage.waitForTimeout(2000);
-  await browser.closePage();
 });
