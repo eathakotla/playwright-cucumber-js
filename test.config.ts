@@ -1,5 +1,8 @@
 import { defineConfig, devices } from '@playwright/test';
 import { TestConfig } from './src/types/types';
+import { WaitForLoadStateOptions } from './src/types/types';
+
+export const LOADSTATE: WaitForLoadStateOptions = 'domcontentloaded';
 
 export const config: TestConfig = {
   playwrightConfig: defineConfig({

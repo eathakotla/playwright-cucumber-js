@@ -12,6 +12,14 @@ baseTest.beforeEach(async () => {
 });
 
 /**
+ * A hook that runs before each test, setting the page context.
+ * @param {Page} page - The page context provided by Playwright.
+ */
+baseTest.afterEach(async () => {
+  await browserProvider.closePage();
+});
+
+/**
  * The base test object with a beforeEach hook already set up.
  * This can be used to define tests with the page context set up.
  */

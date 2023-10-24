@@ -1,20 +1,12 @@
-import { Page } from '@playwright/test';
 import { WebComponent, createComponent } from 'helpers';
-import { getPage } from 'page-utils';
 import { v10 } from 'templates';
 
 export class LoginPage {
-  page: Page;
-  username: WebComponent;
-  password: WebComponent;
-  loginButton: WebComponent;
+  username: WebComponent = createComponent(v10.input('Username'), { alias: 'Username' });
+  password: WebComponent = createComponent(v10.input('Password'), { alias: 'Password' });
+  loginButton: WebComponent = createComponent(v10.button('Log In'), { alias: 'Log In' });
 
-  constructor() {
-    this.page = getPage();
-    this.username = createComponent(this.page, 'Username', v10.input('Username'));
-    this.password = createComponent(this.page, 'Password', v10.input('Password'));
-    this.loginButton = createComponent(this.page, 'Log In', v10.button('Log In'));
-  }
+  constructor() {}
 
   async doLogin(usr: string, pwd: string) {
     await this.username.fill(usr);

@@ -1,10 +1,11 @@
 import { Browser, BrowserContextOptions, Locator, Page, PlaywrightTestConfig, Project, chromium, firefox, webkit } from '@playwright/test';
-import { BrowserInterface } from '../types/types';
+import { BrowserInterface, findOptions } from '../types/types';
 import { config } from '../../test.config';
+import { getPage } from 'page-utils';
 
 interface Component {
   get(): Locator;
-  getAlias(): string;
+  getAlias(): string | undefined;
   getLocatorString(): string;
   toString(): string;
 }
@@ -12,10 +13,10 @@ interface Component {
 export class WebComponent implements Component {
   page: Page;
   locatorString: string;
-  alias: string;
+  alias: string | undefined;
   locator: Locator;
 
-  constructor(page: Page, alias: string, locator: string | Locator) {
+  constructor(page: Page, locator: string | Locator, alias?: string) {
     this.page = page;
     this.locatorString = typeof locator === 'string' ? locator : locator.toString();
     this.alias = alias;
@@ -26,7 +27,15 @@ export class WebComponent implements Component {
     return this.locator;
   }
 
-  getAlias(): string {
+  find(selector: string, options?: findOptions): Locator {
+    return this.locator.locator(selector, options);
+  }
+
+  async findAll(selector: string, options?: findOptions): Promise<Locator[]> {
+    return await this.locator.locator(selector, options).all();
+  }
+
+  getAlias(): string | undefined {
     return this.alias;
   }
 
@@ -114,15 +123,6 @@ export default class PlaywrightBrowser implements BrowserInterface {
 
   async launchBrowser(projectConfig: Project): Promise<Browser> {
     const options = projectConfig.use as BrowserContextOptions;
-    // if (projectConfig.name === 'chromium') {
-    //   return chromium.launch(options);
-    // } else if (projectConfig.name === 'firefox') {
-    //   return firefox.launch(options);
-    // } else if (projectConfig.name === 'webkit') {
-    //   return webkit.launch(options);
-    // } else {
-    //   throw new Error(`Unsupported browser: ${projectConfig.name}`);
-    // }
     switch (projectConfig.name) {
       case 'chromium':
         return chromium.launch(options);
@@ -136,8 +136,15 @@ export default class PlaywrightBrowser implements BrowserInterface {
   }
 }
 
-const createComponent = (page: Page, alias: string, locator: string | Locator): WebComponent => {
-  return new WebComponent(page, alias, locator);
+const createComponent = (locator: string | Locator, options?: { alias?: string; page?: Page }): WebComponent => {
+  let page: Page | undefined;
+  let alias: string | undefined;
+  if (options) {
+    page = options.page;
+    alias = options.alias;
+  }
+  if (!page) page = getPage();
+  return new WebComponent(page, locator, alias);
 };
 
 const getComponents = (object: any): Map<string, WebComponent> => {
@@ -147,7 +154,7 @@ const getComponents = (object: any): Map<string, WebComponent> => {
     let value: any = object[key];
     if (value instanceof WebComponent) {
       let component: WebComponent = value;
-      let alias: string = value.getAlias();
+      let alias: string | undefined = value.getAlias();
       if (alias != undefined) {
         map.set(alias, component);
       }

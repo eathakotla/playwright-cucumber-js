@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "playwright test",
+    "test-seq": "playwright test --workers=1",
     "test-headed": "playwright test --headed",
     "ui": "playwright test --ui",
     "recorder": "playwright codegen",
