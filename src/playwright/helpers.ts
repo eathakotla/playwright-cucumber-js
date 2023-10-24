@@ -9,11 +9,6 @@ interface Component {
   toString(): string;
 }
 
-type browserContainer = {
-  page: Page;
-  browser: Browser;
-};
-
 export class WebComponent implements Component {
   page: Page;
   locatorString: string;
@@ -119,14 +114,24 @@ export default class PlaywrightBrowser implements BrowserInterface {
 
   async launchBrowser(projectConfig: Project): Promise<Browser> {
     const options = projectConfig.use as BrowserContextOptions;
-    if (projectConfig.name === 'chromium') {
-      return chromium.launch(options);
-    } else if (projectConfig.name === 'firefox') {
-      return firefox.launch(options);
-    } else if (projectConfig.name === 'webkit') {
-      return webkit.launch(options);
-    } else {
-      throw new Error(`Unsupported browser: ${projectConfig.name}`);
+    // if (projectConfig.name === 'chromium') {
+    //   return chromium.launch(options);
+    // } else if (projectConfig.name === 'firefox') {
+    //   return firefox.launch(options);
+    // } else if (projectConfig.name === 'webkit') {
+    //   return webkit.launch(options);
+    // } else {
+    //   throw new Error(`Unsupported browser: ${projectConfig.name}`);
+    // }
+    switch (projectConfig.name) {
+      case 'chromium':
+        return chromium.launch(options);
+      case 'firefox':
+        return firefox.launch(options);
+      case 'webkit':
+        return webkit.launch(options);
+      default:
+        throw new Error(`Unsupported browser: ${projectConfig.name}`);
     }
   }
 }

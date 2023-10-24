@@ -118,60 +118,60 @@ export class AdditionalExpects implements expects {
     if (reverse) {
       logger.info('checking locator visibility(not) : %s', locator.toString());
       if (softly) await expect.soft(locator).not.toBeVisible();
-      await expect(locator).not.toBeVisible();
+      else await expect(locator).not.toBeVisible();
       return;
     }
     logger.info('checking locator visibility : %s', locator.toString());
     if (softly) await expect.soft(locator).toBeVisible();
-    await expect(locator).toBeVisible();
+    else await expect(locator).toBeVisible();
   }
 
   async isLocatorExists(locator: Locator, softly: boolean, reverse: boolean = false) {
     if (reverse) {
       logger.info('checking locator presence (not) : %s', locator.toString());
       if (softly) await expect.soft(locator).not.toBeAttached();
-      await expect(locator).not.toBeAttached();
+      else await expect(locator).not.toBeAttached();
       return;
     }
     logger.info('checking locator presence : %s', locator.toString());
     if (softly) await expect.soft(locator).toBeAttached();
-    await expect(locator).toBeAttached();
+    else await expect(locator).toBeAttached();
   }
 
   async isLocatorSelected(locator: Locator, softly: boolean, reverse: boolean = false) {
     if (reverse) {
       logger.info('checking locator is not checked : %s', locator.toString());
       if (softly) await expect.soft(locator).not.toBeChecked();
-      await expect(locator).not.toBeChecked();
+      else await expect(locator).not.toBeChecked();
       return;
     }
     logger.info('checking locator is checked : %s', locator.toString());
     if (softly) await expect.soft(locator).toBeChecked();
-    await expect(locator).toBeChecked();
+    else await expect(locator).toBeChecked();
   }
 
   async isLocatorEditable(locator: Locator, softly: boolean, reverse: boolean = false) {
     if (reverse) {
       logger.info('checking locator is not editable : %s', locator.toString());
       if (softly) await expect.soft(locator).not.toBeEditable();
-      await expect(locator).not.toBeEditable();
+      else await expect(locator).not.toBeEditable();
       return;
     }
     logger.info('checking locator is editable : %s', locator.toString());
     if (softly) await expect.soft(locator).toBeEditable();
-    await expect(locator).toBeEditable();
+    else await expect(locator).toBeEditable();
   }
 
   async isLocatorEnabled(locator: Locator, softly: boolean, reverse: boolean = false) {
     if (reverse) {
       logger.info('checking locator is disabled : %s', locator.toString());
       if (softly) await expect.soft(locator).not.toBeEditable();
-      await expect(locator).not.toBeEditable();
+      else await expect(locator).not.toBeEditable();
       return;
     }
     logger.info('checking locator is enabled : %s', locator.toString());
     if (softly) await expect.soft(locator).toBeEditable();
-    await expect(locator).toBeEditable();
+    else await expect(locator).toBeEditable();
   }
 }
 
