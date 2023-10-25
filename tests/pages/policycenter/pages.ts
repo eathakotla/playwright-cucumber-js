@@ -1,4 +1,5 @@
 import BasePage from './base.page';
+import { DesktopPage } from './desktop.page';
 import { LoginPage } from './login.page';
 import { NavigationBar } from './navigation.bar';
 
@@ -7,10 +8,12 @@ export class PolicyCenterPages {
   private login: LoginPage | undefined;
   private navigation: NavigationBar | undefined;
   private basePage: BasePage | undefined;
+  private desktop: DesktopPage | undefined;
 
   constructor() {
     this.pages.set('Login', this.loginPage());
     this.pages.set('navigation', this.navigationBar());
+    this.pages.set('Desktop', this.desktopPage());
   }
 
   loginPage(): LoginPage {
@@ -26,5 +29,10 @@ export class PolicyCenterPages {
   base(): BasePage {
     this.basePage = this.basePage ? this.basePage : new BasePage();
     return this.basePage;
+  }
+
+  desktopPage(): DesktopPage {
+    this.desktop = this.desktop ? this.desktop : new DesktopPage();
+    return this.desktop;
   }
 }
