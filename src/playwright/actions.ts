@@ -55,6 +55,11 @@ export class PageActionsImpl implements PageActions {
     this.page = page ? page : getPage();
   }
 
+  private shouldProceed(value: string | number | Array<string>, skipIfUndefined: boolean): boolean {
+    if (skipIfUndefined && value === undefined) return false;
+    return true;
+  }
+
   async goto(url: string, options: GotoOptions = { waitUntil: 'domcontentloaded' }): Promise<Response | null> {
     return await this.page.goto(url, options);
   }
@@ -93,17 +98,13 @@ export class PageActionsImpl implements PageActions {
 
   async fill(locator: string | Locator, value: string, skipIfUndefined: boolean | undefined = false, options?: FillOptions): Promise<void> {
     const input = getLocator(locator);
-    if (skipIfUndefined) {
-      if (value == undefined) return;
-    }
+    if (!this.shouldProceed(value, skipIfUndefined)) return;
     await input.fill(value, options);
   }
 
   async fillAndEnter(locator: string | Locator, value: string, skipIfUndefined: boolean | undefined = false, options?: FillOptions): Promise<void> {
     const input = getLocator(locator);
-    if (skipIfUndefined) {
-      if (value == undefined) return;
-    }
+    if (!this.shouldProceed(value, skipIfUndefined)) return;
     await input.fill(value, options);
     await input.press('enter');
   }
@@ -123,32 +124,36 @@ export class PageActionsImpl implements PageActions {
     await input.uncheck(options);
   }
 
-  async selectByIndex(locator: string | Locator, index: number, skipIfUndefined?: boolean | undefined, options?: SelectOptions): Promise<void> {
+  async selectByIndex(
+    locator: string | Locator,
+    index: number,
+    skipIfUndefined: boolean | undefined = false,
+    options?: SelectOptions,
+  ): Promise<void> {
     const input = getLocator(locator);
-    if (skipIfUndefined) {
-      if (index == undefined) return;
-    }
+    if (!this.shouldProceed(index, skipIfUndefined)) return;
     await input.selectOption({ index: index }, options);
   }
 
-  async selectByValue(locator: string | Locator, value: string, skipIfUndefined?: boolean | undefined, options?: SelectOptions): Promise<void> {
+  async selectByValue(
+    locator: string | Locator,
+    value: string,
+    skipIfUndefined: boolean | undefined = false,
+    options?: SelectOptions,
+  ): Promise<void> {
     const input = getLocator(locator);
-    if (skipIfUndefined) {
-      if (value == undefined) return;
-    }
+    if (!this.shouldProceed(value, skipIfUndefined)) return;
     await input.selectOption({ value: value }, options);
   }
 
   async selectByValues(
     locator: string | Locator,
     value: Array<string>,
-    skipIfUndefined?: boolean | undefined,
+    skipIfUndefined: boolean | undefined = false,
     options?: SelectOptions,
   ): Promise<void> {
     const input = getLocator(locator);
-    if (skipIfUndefined) {
-      if (value == undefined) return;
-    }
+    if (!this.shouldProceed(value, skipIfUndefined)) return;
     await input.selectOption(value, options);
   }
 
