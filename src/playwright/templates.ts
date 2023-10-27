@@ -60,4 +60,8 @@ export const v10 = {
     label = escapeTextQuotes(label);
     return `//*[text()=${label}]//parent::div//input[@type='checkbox']`;
   },
+  table: (label: string): string => {
+    label = escapeTextQuotes(label);
+    return `//*[text()=${label}]//parent::div[@class='gw-ListViewWidget']`;
+  },
 };

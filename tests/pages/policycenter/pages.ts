@@ -11,9 +11,9 @@ export class PolicyCenterPages {
   private desktop: DesktopPage | undefined;
 
   constructor() {
-    this.pages.set('Login', this.loginPage());
-    this.pages.set('navigation', this.navigationBar());
-    this.pages.set('Desktop', this.desktopPage());
+    this.pages.set('Login', this.loginPage);
+    this.pages.set('navigation', this.navigationBar);
+    this.pages.set('Desktop', this.desktopPage);
   }
 
   loginPage(): LoginPage {

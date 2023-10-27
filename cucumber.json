@@ -1,0 +1,17 @@
+{
+  "default": {
+    "paths": ["./tests/features"],
+    "publish": false,
+    "dryRun": false,
+    "formatOptions": {
+      "snippetInterface": "async-await"
+    },
+    "format": [
+      ["junit", "reports/junit.xml"],
+      ["html", "reports/cucumber-report.html"]
+    ],
+    "requireModule": ["ts-node/register", "tsconfig-paths/register"],
+    "require": ["./tests/steps/**/*.ts", "./src/setup/hooks.step.ts"],
+    "tags": "@pc-login"
+  }
+}

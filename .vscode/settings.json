@@ -5,5 +5,10 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "typescript.suggest.paths": false,
-  "javascript.suggest.paths": false
+  "javascript.suggest.paths": false,
+  "[cucumber]": {
+    "editor.defaultFormatter": "CucumberOpen.cucumber-official"
+  },
+  "cucumber.features": ["tests/features/**/*.feature"],
+  "cucumber.glue": ["tests/steps/**/*.ts"]
 }

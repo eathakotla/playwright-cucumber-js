@@ -1,7 +1,7 @@
 {
   "name": "learning_playwright_cucumber_ts",
   "version": "1.0.0",
-  "description": "learning playwright cuucmber ts framework",
+  "description": "learning playwright cucumber ts framework",
   "main": "index.js",
   "scripts": {
     "test": "playwright test",
@@ -11,7 +11,9 @@
     "recorder": "playwright codegen",
     "report": "npx playwright show-report",
     "trace-test": "playwright test --trace on",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "cucumber-test": "cucumber-js test",
+    "cucumber": "cucumber-js"
   },
   "keywords": [
     "cucumberjs",
@@ -28,6 +30,8 @@
   "devDependencies": {
     "@playwright/test": "^1.39.0",
     "@types/node": "^20.8.7",
-    "husky": "^8.0.0"
+    "husky": "^8.0.0",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.2.0"
   }
 }

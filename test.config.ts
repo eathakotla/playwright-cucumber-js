@@ -6,6 +6,9 @@ export const LOADSTATE: WaitForLoadStateOptions = 'domcontentloaded';
 
 export const config: TestConfig = {
   playwrightConfig: defineConfig({
+    expect: {
+      timeout: 30000,
+    },
     projects: [
       {
         name: 'chromium',
