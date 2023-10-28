@@ -1,0 +1,145 @@
+[
+  {
+    "description": "    As a user, I'm able to login into the policy center when I use valid credentials",
+    "elements": [
+      {
+        "description": "",
+        "id": "logging-into-policy-center;user-logins-into-policycenter",
+        "keyword": "Scenario",
+        "line": 5,
+        "name": "user logins into policycenter",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 742769300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 6,
+            "name": "user opens policycenter",
+            "match": {
+              "location": "tests\\steps\\policycenter\\common.steps.ts:8"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1772556399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 7,
+            "name": "user logins into application as \"superuser\"",
+            "match": {
+              "location": "tests\\steps\\policycenter\\login.steps.ts:8"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 304073300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "user successfully logins",
+            "match": {
+              "location": "tests\\steps\\policycenter\\login.steps.ts:13"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 7086050699
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 9,
+            "name": "user can access \"navigation\" bar in policycenter",
+            "match": {
+              "location": "tests\\steps\\policycenter\\common.steps.ts:20"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 890700
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "Account tab"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Account tab expand"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Desktop tab"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Desktop tab expand"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Policy tab"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Policy tab expand"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 10,
+            "name": "user able to see following elements",
+            "match": {
+              "location": "src\\cucumber\\common-steps.ts:12"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 35469300
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 183081199
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@pc-login",
+            "line": 4
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "logging-into-policy-center",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "logging into policy center",
+    "tags": [],
+    "uri": "tests\\features\\login.feature"
+  }
+]

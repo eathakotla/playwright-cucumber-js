@@ -10,5 +10,5 @@
     "editor.defaultFormatter": "CucumberOpen.cucumber-official"
   },
   "cucumber.features": ["tests/features/**/*.feature"],
-  "cucumber.glue": ["tests/steps/**/*.ts"]
+  "cucumber.glue": ["tests/steps/**/*.ts", "src/cucumber/**/*.ts"]
 }

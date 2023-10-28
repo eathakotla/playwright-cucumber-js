@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<testsuite failures="0" skipped="0" name="cucumber-js" time="10.124890897" tests="1">
+  <testcase classname="logging into policy center" name="user logins into policycenter" time="10.124890897">
+    <system-out><![CDATA[Given user opens policycenter.............................................passed
+And user logins into application as "superuser"...........................passed
+And user successfully logins..............................................passed
+And user can access "navigation" bar in policycenter......................passed
+And user able to see following elements...................................passed]]></system-out>
+  </testcase>
+</testsuite>

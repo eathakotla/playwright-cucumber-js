@@ -1,12 +1,9 @@
-import { Locator, expect as verify } from '@playwright/test';
-import { config } from '../../test.config';
+import { Locator } from '@playwright/test';
 import { WebComponent } from './helpers';
-
+import { expect } from './helpers';
 /**
  * creating a expect function with timeout configuration. timeout can be provided in test.config.ts
  */
-let softExpect = verify.configure({ soft: true, timeout: config.playwrightConfig.expect?.timeout });
-let expect = verify.configure({ timeout: config.playwrightConfig.expect?.timeout });
 
 export interface expects {
   areVisible(softly?: boolean): Promise<void>;
@@ -31,13 +28,14 @@ export class AdditionalExpects implements expects {
    * @param softly
    */
   async arePresent(softly: boolean = false): Promise<void> {
-    this.get().forEach(async (element: WebComponent | Locator) => {
+    for (let i = 0; i < this.elements!.length; i++) {
+      let element = this.elements?.at(i);
       if (element instanceof WebComponent) {
         await this.checkWebComponentStatus(element, 'exists', softly);
       } else {
-        await this.checkLocatorStatus(element, 'exists', softly);
+        await this.checkLocatorStatus(element!, 'exists', softly);
       }
-    });
+    }
   }
 
   /**
@@ -46,13 +44,14 @@ export class AdditionalExpects implements expects {
    * @param softly
    */
   async areVisible(softly: boolean = false): Promise<void> {
-    this.get().forEach(async (element: WebComponent | Locator) => {
+    for (let i = 0; i < this.elements!.length; i++) {
+      let element = this.elements?.at(i);
       if (element instanceof WebComponent) {
         await this.checkWebComponentStatus(element, 'visible', softly);
       } else {
-        await this.checkLocatorStatus(element, 'visible', softly);
+        await this.checkLocatorStatus(element!, 'visible', softly);
       }
-    });
+    }
   }
 
   /**
@@ -117,10 +116,10 @@ export class AdditionalExpects implements expects {
     if (reverse) {
       if (softly) await expect.soft(locator, `element should not be visible`).not.toBeVisible();
       else await expect(locator).not.toBeVisible();
-      return;
+    } else {
+      if (softly) await expect.soft(locator, `element should be visible`).toBeVisible({ timeout: 30000 });
+      else await expect(locator).toBeVisible();
     }
-    if (softly) await expect.soft(locator, `element should be visible`).toBeVisible();
-    else await expect(locator).toBeVisible();
   }
 
   async isLocatorExists(locator: Locator, softly: boolean, reverse: boolean = false) {
@@ -168,4 +167,4 @@ const expects = (elements?: WebComponent[] | Locator[]) => {
   return new AdditionalExpects(elements);
 };
 
-export { softExpect, expect, expects };
+export { expects };

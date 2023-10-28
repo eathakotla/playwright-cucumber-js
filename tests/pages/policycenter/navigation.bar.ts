@@ -1,6 +1,7 @@
-import { WebComponent, createComponent } from 'helpers';
-import { expect, expects } from 'expects';
+import { WebComponent, createComponent, getComponents } from 'helpers';
+import { expects } from 'expects';
 import { v10 } from 'templates';
+import { expect } from 'helpers';
 
 export class NavigationBar {
   accountTab: WebComponent = createComponent(v10.navTab('Account'), { alias: 'Account tab' });
@@ -18,8 +19,11 @@ export class NavigationBar {
   teamTab: WebComponent = createComponent(v10.navTab('Team'), { alias: 'Team tab' });
   newAccountItem: WebComponent = createComponent(v10.navMenuItem('New Account'), { alias: 'New Account' });
   searchAccountInput: WebComponent = createComponent(this.accountTab.find('.gw-SearchItemButtonWidget'), { alias: 'Search Account button' });
+  elements: Map<string, WebComponent>;
 
-  constructor() {}
+  constructor() {
+    this.elements = getComponents(this);
+  }
 
   async validateTabs() {
     let elements = [

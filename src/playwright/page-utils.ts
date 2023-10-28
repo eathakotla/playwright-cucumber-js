@@ -1,7 +1,8 @@
-import { Page } from '@playwright/test';
+import { Browser, Page } from '@playwright/test';
 
 export const SMALL_TIMEOUT = 5 * 1000;
 let page: Page;
+let browser: Browser;
 
 /**
  * Returns the current Page.
@@ -17,6 +18,22 @@ export function getPage(): Page {
  */
 export function setPage(pageInstance: Page): void {
   page = pageInstance;
+}
+
+/**
+ * Returns the current Page.
+ * @returns {Page} The current Page.
+ */
+export function getBrowser(): Browser {
+  return browser;
+}
+
+/**
+ * Sets the current Page.
+ * @param {Page} pageInstance - The Page instance to set as the current Page.
+ */
+export function setBrowser(browserInstance: Browser): void {
+  browser = browserInstance;
 }
 
 /**

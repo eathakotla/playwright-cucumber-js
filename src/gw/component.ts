@@ -1,5 +1,5 @@
 import { Locator, Page } from '@playwright/test';
-import { softExpect } from 'expects';
+import { softExpect } from 'helpers';
 import { WebComponent } from 'helpers';
 import { getPage } from 'page-utils';
 

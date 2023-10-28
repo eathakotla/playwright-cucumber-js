@@ -6,6 +6,7 @@ export const LOADSTATE: WaitForLoadStateOptions = 'domcontentloaded';
 
 export const config: TestConfig = {
   playwrightConfig: defineConfig({
+    globalTimeout: 30000,
     expect: {
       timeout: 30000,
     },

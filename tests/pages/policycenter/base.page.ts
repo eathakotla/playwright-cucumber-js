@@ -1,6 +1,6 @@
-import { Page } from '@playwright/test';
 import { getPage } from 'page-utils';
 import { getAppDetails } from '../../../src/setup/env-utils';
+import { Page } from '@playwright/test';
 
 export default class BasePage {
   page: Page;

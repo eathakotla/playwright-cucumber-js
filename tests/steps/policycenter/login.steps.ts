@@ -12,4 +12,5 @@ When('user logins into application as {string}', async function (name) {
 
 Then('user successfully logins', async function () {
   await pc.navigationBar().validateTabs();
+  await pc.base().page.waitForTimeout(5000);
 });

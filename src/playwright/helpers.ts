@@ -1,7 +1,21 @@
-import { Browser, BrowserContextOptions, Locator, Page, PlaywrightTestConfig, Project, chromium, firefox, webkit } from '@playwright/test';
+import {
+  Browser,
+  BrowserContextOptions,
+  Locator,
+  Page,
+  PlaywrightTestConfig,
+  Project,
+  chromium,
+  firefox,
+  webkit,
+  expect as verify,
+} from '@playwright/test';
 import { BrowserInterface, findOptions } from '../types/types';
 import { config } from '../../test.config';
-import { getPage } from 'page-utils';
+import { getPage, setBrowser, setPage } from 'page-utils';
+
+let softExpect = verify.configure({ soft: true, timeout: 30000 });
+let expect = verify.configure({ timeout: 30000 });
 
 interface Component {
   get(): Locator;
@@ -101,6 +115,8 @@ export default class PlaywrightBrowser implements BrowserInterface {
   async launchPage(): Promise<Page> {
     this.browser = await this.getBrowser();
     this.page = await this.browser.newPage();
+    setPage(this.page);
+    setBrowser(this.browser);
     return this.page;
   }
 
@@ -109,7 +125,10 @@ export default class PlaywrightBrowser implements BrowserInterface {
   }
 
   async closePage(): Promise<void> {
-    if (this.browser) await this.browser.close();
+    if (this.browser) {
+      await this.page?.close();
+      await this.browser.close();
+    }
   }
 
   async getBrowser(): Promise<Browser> {
@@ -144,7 +163,7 @@ const createComponent = (locator: string | Locator, options?: { alias?: string; 
     alias = options.alias;
   }
   if (!page) page = getPage();
-  return new WebComponent(page, locator, alias);
+  return new WebComponent(page!, locator, alias);
 };
 
 const getComponents = (object: any): Map<string, WebComponent> => {
@@ -165,4 +184,4 @@ const getComponents = (object: any): Map<string, WebComponent> => {
 
 const browserProvider = new PlaywrightBrowser();
 
-export { createComponent, getComponents, browserProvider };
+export { softExpect, expect, createComponent, getComponents, browserProvider };

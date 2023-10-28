@@ -3,17 +3,29 @@ import { DesktopPage } from './desktop.page';
 import { LoginPage } from './login.page';
 import { NavigationBar } from './navigation.bar';
 
+interface MethodStore {
+  [key: string]: () => void;
+}
+
 export class PolicyCenterPages {
-  pages = new Map<string, any>();
+  pages: MethodStore;
   private login: LoginPage | undefined;
   private navigation: NavigationBar | undefined;
   private basePage: BasePage | undefined;
   private desktop: DesktopPage | undefined;
 
   constructor() {
-    this.pages.set('Login', this.loginPage);
-    this.pages.set('navigation', this.navigationBar);
-    this.pages.set('Desktop', this.desktopPage);
+    this.pages = {
+      Login: () => {
+        return this.loginPage();
+      },
+      navigation: () => {
+        return this.navigationBar();
+      },
+      base: () => {
+        return this.base();
+      },
+    };
   }
 
   loginPage(): LoginPage {
