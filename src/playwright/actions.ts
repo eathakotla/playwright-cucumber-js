@@ -15,9 +15,9 @@ import {
   UploadValues,
   WaitForLoadStateOptions,
 } from '../types/types';
-import { getPage } from 'page-utils';
-import { LOADSTATE } from '../../test.config';
-import { getLocator } from 'locator';
+import { getPage } from 'playwright/page-utils';
+import { LOADSTATE } from 'test.config';
+import { getLocator } from 'playwright/locator';
 
 export interface PageActions {
   goto(url: string, options: GotoOptions): Promise<null | Response>;

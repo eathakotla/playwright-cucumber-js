@@ -10,12 +10,12 @@ import {
   webkit,
   expect as verify,
 } from '@playwright/test';
-import { BrowserInterface, findOptions } from '../types/types';
-import { config } from '../../test.config';
-import { getPage, setBrowser, setPage } from 'page-utils';
+import { BrowserInterface, findOptions } from 'custom-types/types';
+import { config } from 'test.config';
+import { getPage, setBrowser, setPage } from 'playwright/page-utils';
 
-let softExpect = verify.configure({ soft: true, timeout: 30000 });
-let expect = verify.configure({ timeout: 30000 });
+let softExpect = verify.configure({ soft: true, timeout: config.playwrightConfig.expect?.timeout });
+let expect = verify.configure({ timeout: config.playwrightConfig.expect?.timeout });
 
 interface Component {
   get(): Locator;
@@ -25,28 +25,24 @@ interface Component {
 }
 
 export class WebComponent implements Component {
-  page: Page;
   locatorString: string;
   alias: string | undefined;
-  locator: Locator;
 
-  constructor(page: Page, locator: string | Locator, alias?: string) {
-    this.page = page;
-    this.locatorString = typeof locator === 'string' ? locator : locator.toString();
+  constructor(locatorString: string, alias?: string) {
+    this.locatorString = locatorString;
     this.alias = alias;
-    this.locator = typeof locator === 'string' ? page.locator(locator) : locator;
   }
 
   get(): Locator {
-    return this.locator;
+    return getPage().locator(this.locatorString);
   }
 
   find(selector: string, options?: findOptions): Locator {
-    return this.locator.locator(selector, options);
+    return getPage().locator(this.locatorString).locator(selector, options);
   }
 
   async findAll(selector: string, options?: findOptions): Promise<Locator[]> {
-    return await this.locator.locator(selector, options).all();
+    return await getPage().locator(this.locatorString).locator(selector, options).all();
   }
 
   getAlias(): string | undefined {
@@ -155,15 +151,12 @@ export default class PlaywrightBrowser implements BrowserInterface {
   }
 }
 
-const createComponent = (locator: string | Locator, options?: { alias?: string; page?: Page }): WebComponent => {
-  let page: Page | undefined;
+const createComponent = (locator: string, options?: { alias?: string }): WebComponent => {
   let alias: string | undefined;
   if (options) {
-    page = options.page;
     alias = options.alias;
   }
-  if (!page) page = getPage();
-  return new WebComponent(page!, locator, alias);
+  return new WebComponent(locator, alias);
 };
 
 const getComponents = (object: any): Map<string, WebComponent> => {

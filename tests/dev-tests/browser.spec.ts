@@ -1,5 +1,5 @@
-import { PolicyCenterPages } from './pages/policycenter/pages';
-import { test } from '../src/setup/customPageTest';
+import { PolicyCenterPages } from 'pages/policycenter/pages';
+import { test } from 'src/setup/customPageTest';
 
 test('simple browser test', async () => {
   let pc = new PolicyCenterPages();

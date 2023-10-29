@@ -1,6 +1,3 @@
-import { Locator, Page } from '@playwright/test';
-import { getPage } from 'page-utils';
-
 export function escapeTextQuotes(label: string): string {
   if (!label.includes('"')) {
     return `\"${label}\"`;
@@ -39,10 +36,6 @@ export const v10 = {
   navTabExpand: (label: string): string => {
     label = escapeTextQuotes(label);
     return `(//div[normalize-space(.)=${label}]//ancestor::div[contains(@class,'gw-TabWidget')]//div[@class='gw-action--expand-button'])[1]`;
-  },
-  navMenuItem: (label: string, page?: Page): Locator => {
-    if (!page) page = getPage();
-    return page.getByRole('menuitem', { name: label });
   },
   select: (label: string): string => {
     label = escapeTextQuotes(label);

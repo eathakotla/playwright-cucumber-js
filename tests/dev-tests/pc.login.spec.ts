@@ -1,5 +1,7 @@
-import { test } from '../src/setup/custom-test';
-import { PolicyCenterPages } from './pages/policycenter/pages';
+import { test } from 'src/setup/custom-test';
+import { PolicyCenterPages } from 'pages/policycenter/pages';
+import { expects } from 'playwright/expects';
+import { getPage } from 'playwright/page-utils';
 
 test('user able to login into the policy center', async () => {
   let pc = new PolicyCenterPages();
@@ -14,5 +16,6 @@ test('user able to login into the policy center', async () => {
   expected.set('column#1', '#blank');
   await pc.desktopPage().activitiesTable.checkRowData(4, expected);
   await pc.navigationBar().startNewAccount();
-  await pc.base().page.waitForTimeout(2000);
+  await getPage().waitForTimeout(2000);
+  await expects(pc.enterAccountInformatinPage().enterAccountInformationForm).arePresent();
 });

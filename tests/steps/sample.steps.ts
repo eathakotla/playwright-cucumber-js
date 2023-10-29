@@ -1,5 +1,5 @@
 import { When, Then, DataTable } from '@cucumber/cucumber';
-import { columnToArray } from '../../src/cucumber/table-utils';
+import { columnToArray } from 'src/cucumber/data-utils';
 
 When('user enters credentials', async function (dataTable: DataTable) {
   console.log(dataTable.hashes()); // this should be used when having horizontal table

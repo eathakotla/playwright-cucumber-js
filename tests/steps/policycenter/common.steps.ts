@@ -1,7 +1,7 @@
 import { Given, When, Then } from '@cucumber/cucumber';
-import { PolicyCenterPages } from '../../pages/policycenter/pages';
-import { CustomWorld } from '../customWorld';
-import { logger } from '../../../src/setup/logger';
+import { PolicyCenterPages } from 'pages/policycenter/pages';
+import { CustomWorld } from 'cucumber/steps/customWorld';
+import { logger } from 'src/setup/logger';
 
 let pc = new PolicyCenterPages();
 
@@ -29,4 +29,8 @@ Then('user prints all the elements of the page', async function (this: CustomWor
   let page: any = this.getPageClass();
   let elements = page.elements;
   logger.info('elements : %s', elements);
+});
+
+When('user starts new Account', async function () {
+  await pc.navigationBar().startNewAccount();
 });

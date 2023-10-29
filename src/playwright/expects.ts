@@ -1,6 +1,6 @@
 import { Locator } from '@playwright/test';
-import { WebComponent } from './helpers';
-import { expect } from './helpers';
+import { WebComponent } from 'playwright/helpers';
+import { expect } from 'playwright/helpers';
 /**
  * creating a expect function with timeout configuration. timeout can be provided in test.config.ts
  */

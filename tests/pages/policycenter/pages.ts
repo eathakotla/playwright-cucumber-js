@@ -1,3 +1,4 @@
+import EnterAccountInformationPage from './account/enterAccountInformation.page';
 import BasePage from './base.page';
 import { DesktopPage } from './desktop.page';
 import { LoginPage } from './login.page';
@@ -13,6 +14,7 @@ export class PolicyCenterPages {
   private navigation: NavigationBar | undefined;
   private basePage: BasePage | undefined;
   private desktop: DesktopPage | undefined;
+  private enterAccountInformation: EnterAccountInformationPage | undefined;
 
   constructor() {
     this.pages = {
@@ -24,6 +26,9 @@ export class PolicyCenterPages {
       },
       base: () => {
         return this.base();
+      },
+      'Enter Account Information': () => {
+        return this.enterAccountInformatinPage();
       },
     };
   }
@@ -46,5 +51,10 @@ export class PolicyCenterPages {
   desktopPage(): DesktopPage {
     this.desktop = this.desktop ? this.desktop : new DesktopPage();
     return this.desktop;
+  }
+
+  enterAccountInformatinPage(): EnterAccountInformationPage {
+    this.enterAccountInformation = this.enterAccountInformation ? this.enterAccountInformation : new EnterAccountInformationPage();
+    return this.enterAccountInformation;
   }
 }

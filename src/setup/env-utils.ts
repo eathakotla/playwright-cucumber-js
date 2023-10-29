@@ -1,5 +1,5 @@
-import { config } from '../../test.config';
-import { application, environment } from '../types/types';
+import { config } from 'test.config';
+import { application, environment } from 'custom-types/types';
 
 export function getEnvironment(): environment {
   const envString: string = config.environment;

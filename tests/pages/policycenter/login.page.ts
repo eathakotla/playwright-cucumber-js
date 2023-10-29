@@ -1,5 +1,5 @@
-import { WebComponent, createComponent, getComponents } from 'helpers';
-import { v10 } from 'templates';
+import { WebComponent, createComponent, getComponents } from 'playwright/helpers';
+import { v10 } from 'playwright/templates';
 
 export class LoginPage {
   username: WebComponent = createComponent(v10.input('Username'), { alias: 'Username' });

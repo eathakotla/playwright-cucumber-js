@@ -1,7 +1,8 @@
 import { When, Then } from '@cucumber/cucumber';
-import { getAppDetails } from '../../../src/setup/env-utils';
-import { PolicyCenterPages } from '../../pages/policycenter/pages';
-import { user } from '../../../src/types/types';
+import { getAppDetails } from 'src/setup/env-utils';
+import { PolicyCenterPages } from 'pages/policycenter/pages';
+import { user } from 'src/types/types';
+import { getPage } from 'playwright/page-utils';
 
 let pc = new PolicyCenterPages();
 
@@ -12,5 +13,5 @@ When('user logins into application as {string}', async function (name) {
 
 Then('user successfully logins', async function () {
   await pc.navigationBar().validateTabs();
-  await pc.base().page.waitForTimeout(5000);
+  await getPage().waitForTimeout(5000);
 });

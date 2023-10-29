@@ -1,11 +1,10 @@
-import { Locator, Page } from '@playwright/test';
-import { softExpect } from 'helpers';
-import { WebComponent } from 'helpers';
-import { getPage } from 'page-utils';
+import { Locator } from '@playwright/test';
+import { softExpect } from 'playwright/helpers';
+import { WebComponent } from 'playwright/helpers';
 
 export class TableComponent extends WebComponent {
-  constructor(locator: string | Locator, alias?: string, page: Page = getPage()) {
-    super(page, locator, alias);
+  constructor(locator: string, alias?: string) {
+    super(locator, alias);
   }
 
   async getRows(): Promise<Locator[]> {

@@ -1,6 +1,6 @@
 import { Page, test as baseTest } from '@playwright/test';
-import { setPage } from '../playwright/page-utils';
-import { browserProvider } from 'helpers';
+import { setPage } from 'playwright/page-utils';
+import { browserProvider } from 'playwright/helpers';
 
 /**
  * A hook that runs before each test, setting the page context.

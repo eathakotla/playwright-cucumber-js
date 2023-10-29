@@ -1,7 +1,7 @@
-import { WebComponent, createComponent, getComponents } from 'helpers';
-import { expects } from 'expects';
-import { v10 } from 'templates';
-import { expect } from 'helpers';
+import { WebComponent, createComponent, getComponents } from 'playwright/helpers';
+import { expects } from 'playwright/expects';
+import { v10 } from 'playwright/templates';
+import { expect } from 'playwright/helpers';
 
 export class NavigationBar {
   accountTab: WebComponent = createComponent(v10.navTab('Account'), { alias: 'Account tab' });
@@ -17,8 +17,8 @@ export class NavigationBar {
   administrationTab: WebComponent = createComponent(v10.navTab('Administration'), { alias: 'Administration' });
   administrationtabExpand: WebComponent = createComponent(v10.navTabExpand('Administration'), { alias: 'Administration tab expand' });
   teamTab: WebComponent = createComponent(v10.navTab('Team'), { alias: 'Team tab' });
-  newAccountItem: WebComponent = createComponent(v10.navMenuItem('New Account'), { alias: 'New Account' });
-  searchAccountInput: WebComponent = createComponent(this.accountTab.find('.gw-SearchItemButtonWidget'), { alias: 'Search Account button' });
+  newAccountItem: WebComponent = createComponent("//div[contains(@id,'AccountTab_NewAccount')]/div[@role='menuitem']", { alias: 'New Account' });
+  searchAccountInput: WebComponent = createComponent('//input[contains(@name,"AccountNumberSearchItem")]', { alias: 'Search Account button' });
   elements: Map<string, WebComponent>;
 
   constructor() {

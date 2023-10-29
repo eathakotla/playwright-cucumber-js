@@ -1,6 +1,6 @@
 import { Page } from '@playwright/test';
-import { getPage } from 'page-utils';
-import { TableComponent } from '../../../src/gw/component';
+import { getPage } from 'playwright/page-utils';
+import { TableComponent } from 'src/gw/component';
 
 export class DesktopPage {
   page: Page = getPage();

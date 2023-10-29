@@ -15,10 +15,36 @@ export const config: TestConfig = {
         name: 'chromium',
         use: { ...devices['Desktop Chrome'], headless: false },
       },
+      {
+        name: 'webkit',
+        use: {
+          ...devices['Desktop Safari'],
+          headless: false,
+          launchOptions: {
+            logger: {
+              isEnabled: (name, severity) => true,
+              log: (name, severity, message, args) => console.log(`${name} ${message}`),
+            },
+          },
+        },
+      },
+      {
+        name: 'firefox',
+        use: {
+          ...devices['Desktop Firefox'],
+          headless: false,
+          launchOptions: {
+            logger: {
+              isEnabled: (name, severity) => true,
+              log: (name, severity, message, args) => console.log(`${name} ${message}`),
+            },
+          },
+        },
+      },
     ],
   }),
   environment: 'qa',
-  browser_project: 'chromium',
+  browser_project: 'firefox',
   environments: [
     {
       name: 'qa',
