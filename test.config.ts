@@ -15,6 +15,10 @@ export const config: TestConfig = {
         use: { ...devices['Desktop Chrome'], headless: false, launchOptions: { devtools: true } },
       },
       {
+        name: 'chromium-headless',
+        use: { ...devices['Desktop Chrome'], headless: true, launchOptions: { devtools: true } },
+      },
+      {
         name: 'webkit',
         use: {
           ...devices['Desktop Safari'],
@@ -31,7 +35,7 @@ export const config: TestConfig = {
     ],
   }),
   environment: 'qa',
-  browser_project: 'chromium',
+  browser_project: process.env.BROWSER ? process.env.BROWSER : 'chromium',
   environments: [
     {
       name: 'qa',
