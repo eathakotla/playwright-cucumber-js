@@ -24,6 +24,6 @@ module.exports = {
     format: ['junit:reports/junit.xml', 'html:reports/cucumber-report.html', 'json:reports/cucumber-report.json', '@cucumber/pretty-formatter'],
     requireModule: ['ts-node/register', 'tsconfig-paths/register'],
     require: ['./tests/steps/**/*.ts', './src/cucumber/steps/**/*.ts'],
-    tags: '',
+    tags: '@form-assertion',
   },
 };

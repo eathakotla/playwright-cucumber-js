@@ -4,6 +4,9 @@
   "editor.fontFamily": "'Martian Mono Semicondensed',Consolas, 'Courier New', monospace",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  },
   "typescript.suggest.paths": false,
   "javascript.suggest.paths": false,
   "[cucumber]": {

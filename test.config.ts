@@ -1,31 +1,24 @@
 import { defineConfig, devices } from '@playwright/test';
-import { TestConfig } from './src/types/types';
-import { WaitForLoadStateOptions } from './src/types/types';
+import { TestConfig, WaitForLoadStateOptions } from './src/types/types';
 
 export const LOADSTATE: WaitForLoadStateOptions = 'domcontentloaded';
 
 export const config: TestConfig = {
   playwrightConfig: defineConfig({
-    globalTimeout: 30000,
+    // globalTimeout: 30000,
     expect: {
       timeout: 30000,
     },
     projects: [
       {
         name: 'chromium',
-        use: { ...devices['Desktop Chrome'], headless: false },
+        use: { ...devices['Desktop Chrome'], headless: false, launchOptions: { devtools: true } },
       },
       {
         name: 'webkit',
         use: {
           ...devices['Desktop Safari'],
           headless: false,
-          launchOptions: {
-            logger: {
-              isEnabled: (name, severity) => true,
-              log: (name, severity, message, args) => console.log(`${name} ${message}`),
-            },
-          },
         },
       },
       {
@@ -33,18 +26,12 @@ export const config: TestConfig = {
         use: {
           ...devices['Desktop Firefox'],
           headless: false,
-          launchOptions: {
-            logger: {
-              isEnabled: (name, severity) => true,
-              log: (name, severity, message, args) => console.log(`${name} ${message}`),
-            },
-          },
         },
       },
     ],
   }),
   environment: 'qa',
-  browser_project: 'firefox',
+  browser_project: 'chromium',
   environments: [
     {
       name: 'qa',

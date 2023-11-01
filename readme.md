@@ -1,18 +1,20 @@
-#### following is the simple browser configuration
+# Playwright-Cucumber-Typescript
+
+## following is the simple browser configuration
 
 ```typescript
     {
       name: 'firefox',
       use: { ...devices['Desktop Firefox'] },
     },
-    
+
     {
       name: 'webkit',
       use: { ...devices['Desktop Safari'],headless: false },
     }
 ```
 
-#### following configuration should be used for mobile emulation
+## following configuration should be used for mobile emulation
 
 ```typescript
     /* Test against mobile viewports. */
@@ -37,7 +39,7 @@
 
 ```
 
-To run custom server, 
+To run custom server,
 
 ```typescript
     /* Run your local dev server before starting the tests */

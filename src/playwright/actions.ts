@@ -1,4 +1,7 @@
 import { Dialog, Locator, Page, Response } from '@playwright/test';
+import { getLocator } from 'playwright/locator';
+import { getPage } from 'playwright/page-utils';
+import { LOADSTATE } from 'test.config';
 import {
   CheckOptions,
   ClearOptions,
@@ -15,9 +18,6 @@ import {
   UploadValues,
   WaitForLoadStateOptions,
 } from '../types/types';
-import { getPage } from 'playwright/page-utils';
-import { LOADSTATE } from 'test.config';
-import { getLocator } from 'playwright/locator';
 
 export interface PageActions {
   goto(url: string, options: GotoOptions): Promise<null | Response>;
@@ -96,7 +96,7 @@ export class PageActionsImpl implements PageActions {
     await input.click(options);
   }
 
-  async fill(locator: string | Locator, value: string, skipIfUndefined: boolean | undefined = false, options?: FillOptions): Promise<void> {
+  async fill(locator: string | Locator, value: string, skipIfUndefined: boolean = false, options?: FillOptions): Promise<void> {
     const input = getLocator(locator);
     if (!this.shouldProceed(value, skipIfUndefined)) return;
     await input.fill(value, options);

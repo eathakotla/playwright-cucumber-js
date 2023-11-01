@@ -10,6 +10,7 @@
     "importHelpers": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
+    "resolveJsonModule": true,
     "forceConsistentCasingInFileNames": true,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
@@ -32,6 +33,6 @@
     "noImplicitReturns": true, // Ensures that all code paths in a function explicitly return a value
     "typeRoots": ["node_modules/@types"] // Specifies the location of type declaration files
   },
-  "include": ["src/**/*.ts", "tests/**/*.ts", "playwright.config.ts"],
+  "include": ["src/**/*.ts", "tests/**/*.ts", "playwright.config.ts", "src/playwright/js/XHRGlobalEvents.js"],
   "exclude": ["node_modules"]
 }

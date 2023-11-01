@@ -7,12 +7,14 @@ import {
   Project,
   chromium,
   firefox,
-  webkit,
   expect as verify,
+  webkit,
 } from '@playwright/test';
-import { BrowserInterface, findOptions } from 'custom-types/types';
-import { config } from 'test.config';
+import { BrowserInterface, FillOptions, SelectOptions, findOptions } from 'custom-types/types';
 import { getPage, setBrowser, setPage } from 'playwright/page-utils';
+import { logger } from 'src/setup/logger';
+import { config } from 'test.config';
+import { pageActions } from './actions';
 
 let softExpect = verify.configure({ soft: true, timeout: config.playwrightConfig.expect?.timeout });
 let expect = verify.configure({ timeout: config.playwrightConfig.expect?.timeout });
@@ -55,14 +57,67 @@ export class WebComponent implements Component {
 
   async click() {
     await this.get().click();
+    logger.info("clicked on element '%s'", this.alias);
   }
 
-  async fill(value: string) {
-    await this.get().fill(value);
+  async clickAndWait() {
+    await this.get().click();
+    await getPage().waitForFunction(() => {
+      console.log((window as any)['processFlag']);
+      let number = (window as any)['processFlag'];
+      return number == '4' || number == '-1';
+    });
+    // await Promise.all([this.get().click(), getPage().waitForTimeout(1000), getPage().waitForRequest((request) => request.resourceType() === 'xhr')]);
+    logger.info("clicked on element '%s'", this.alias);
   }
 
-  async selectOptionUsingVisibleText(text: string) {
-    await this.get().selectOption(text);
+  async fill(value: string, skipIfUndefinedOrBlank?: boolean, options?: FillOptions) {
+    await pageActions.fill(this.locatorString, value, skipIfUndefinedOrBlank, options);
+    logger.info("entered text '%s' in field '%s'", value, this.alias);
+  }
+
+  async fillAndWait(value: string, skipIfUndefinedOrBlank?: boolean, options?: FillOptions) {
+    await pageActions.fill(this.locatorString, value, skipIfUndefinedOrBlank, options);
+    await getPage().locator(this.locatorString).press('Tab', options);
+    await getPage().waitForFunction(() => {
+      console.log((window as any)['processFlag']);
+      let number = (window as any)['processFlag'];
+      return number == '4' || number == '-1';
+    });
+    // await Promise.all([
+    //   pageActions.fill(this.locatorString, value, skipIfUndefinedOrBlank, options),
+    //   getPage().waitForRequest((request) => request.resourceType() === 'xhr'),
+    // ]);
+    logger.info("entered text '%s' in field '%s'", value, this.alias);
+  }
+
+  async fillAndPressTab(value: string, skipIfUndefinedOrBlank?: boolean, options?: FillOptions) {
+    await pageActions.fill(this.locatorString, value, skipIfUndefinedOrBlank, options);
+    await getPage().locator(this.locatorString).press('Tab', options);
+    logger.info("entered text '%s' in field '%s'", value, this.alias);
+  }
+
+  async selectByText(text: string, skipIfUndefinedOrBlank?: boolean, options?: SelectOptions) {
+    await pageActions.selectByText(this.locatorString, text, skipIfUndefinedOrBlank, options);
+    logger.info("selected option '%s' in dropdown '%s'", text, this.alias);
+  }
+
+  async selectByTextAndWait(text: string, skipIfUndefinedOrBlank?: boolean, options?: SelectOptions) {
+    await pageActions.selectByText(this.locatorString, text, skipIfUndefinedOrBlank, options);
+    await getPage().waitForFunction(() => {
+      console.log((window as any)['processFlag']);
+      let number = (window as any)['processFlag'];
+      return number == '4' || number == '-1';
+    });
+    // await Promise.all([
+    //   pageActions.selectByText(this.locatorString, text, skipIfUndefinedOrBlank, options),
+    //   getPage().waitForRequest((request) => {
+    //     logger.info('request : %s', request.url());
+    //     logger.info('request type : %s', request.resourceType());
+    //     return request.resourceType() === 'xhr';
+    //   }),
+    // ]);
+    logger.info("selected option '%s' in dropdown '%s'", text, this.alias);
   }
 
   async selectOptionusingIndex(index: number) {
@@ -73,7 +128,7 @@ export class WebComponent implements Component {
     await this.get().selectOption({ value: value });
   }
 
-  async waitForVisible(timeout: number) {
+  async waitForVisible(timeout?: number) {
     await this.get().waitFor({
       state: 'visible',
       timeout: timeout,
@@ -110,7 +165,14 @@ export default class PlaywrightBrowser implements BrowserInterface {
 
   async launchPage(): Promise<Page> {
     this.browser = await this.getBrowser();
-    this.page = await this.browser.newPage();
+    let context = await this.browser.newContext();
+    await context.addInitScript({
+      path: './src/playwright/js/XHRGlobalEvents.js',
+    });
+    this.page = await context.newPage();
+    if (config.playwrightConfig.globalTimeout !== undefined) {
+      this.page.setDefaultTimeout(config.playwrightConfig.globalTimeout!);
+    }
     setPage(this.page);
     setBrowser(this.browser);
     return this.page;
@@ -138,16 +200,21 @@ export default class PlaywrightBrowser implements BrowserInterface {
 
   async launchBrowser(projectConfig: Project): Promise<Browser> {
     const options = projectConfig.use as BrowserContextOptions;
+    let browser: Browser;
     switch (projectConfig.name) {
       case 'chromium':
-        return chromium.launch(options);
+        browser = await chromium.launch(options);
+        break;
       case 'firefox':
-        return firefox.launch(options);
+        browser = await firefox.launch(options);
+        break;
       case 'webkit':
-        return webkit.launch(options);
+        browser = await webkit.launch(options);
+        break;
       default:
         throw new Error(`Unsupported browser: ${projectConfig.name}`);
     }
+    return browser;
   }
 }
 
@@ -177,4 +244,4 @@ const getComponents = (object: any): Map<string, WebComponent> => {
 
 const browserProvider = new PlaywrightBrowser();
 
-export { softExpect, expect, createComponent, getComponents, browserProvider };
+export { browserProvider, createComponent, expect, getComponents, softExpect };
