@@ -49,3 +49,18 @@ To run custom server,
     reuseExistingServer: !process.env.CI,
     },
 ```
+
+To get pcf details
+
+> Alt + Shift + I
+
+To get page layout
+
+> Alt + Shift + W
+
+Help Window: Alt-Shift-H
+Info Page: Alt-Shift-I
+Server Tools: Alt-Shift-T
+Reload PCFs: Alt-Shift-L
+Widget Page Info: Alt-Shift-W
+Edit Page Config: Alt-Shift-E

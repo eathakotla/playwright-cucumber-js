@@ -49,6 +49,14 @@ export const v10 = {
     label = escapeTextQuotes(label);
     return `//div[normalize-space(.)=${label}]//parent::div[@role='tab']`;
   },
+  label: (label: string): string => {
+    label = escapeTextQuotes(label);
+    return `//div[normalize-space(.)=${label}]//parent::div[@role='tab']`;
+  },
+  link: (label: string): string => {
+    label = escapeTextQuotes(label);
+    return `//div[normalize-space(.)=${label}]//parent::div[@role='tab']`;
+  },
   checkbox: (label: string): string => {
     label = escapeTextQuotes(label);
     return `//*[text()=${label}]//parent::div//input[@type='checkbox']`;

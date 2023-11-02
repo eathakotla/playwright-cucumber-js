@@ -1,15 +1,4 @@
-import {
-  Browser,
-  BrowserContextOptions,
-  Locator,
-  Page,
-  PlaywrightTestConfig,
-  Project,
-  chromium,
-  firefox,
-  expect as verify,
-  webkit,
-} from '@playwright/test';
+import { Browser, LaunchOptions, Locator, Page, PlaywrightTestConfig, Project, chromium, firefox, expect as verify, webkit } from '@playwright/test';
 import { BrowserInterface, FillOptions, SelectOptions, findOptions } from 'custom-types/types';
 import { getPage, setBrowser, setPage } from 'playwright/page-utils';
 import { logger } from 'src/setup/logger';
@@ -199,21 +188,30 @@ export default class PlaywrightBrowser implements BrowserInterface {
   }
 
   async launchBrowser(projectConfig: Project): Promise<Browser> {
-    const options = projectConfig.use as BrowserContextOptions;
+    const options = projectConfig.use as LaunchOptions;
     let browser: Browser;
-    switch (projectConfig.name) {
-      case 'chromium':
-        browser = await chromium.launch(options);
-        break;
-      case 'firefox':
-        browser = await firefox.launch(options);
-        break;
-      case 'webkit':
-        browser = await webkit.launch(options);
-        break;
-      default:
-        throw new Error(`Unsupported browser: ${projectConfig.name}`);
+    if (projectConfig.name?.startsWith('chromium')) {
+      browser = await chromium.launch(options);
+    } else if (projectConfig.name?.startsWith('firefox')) {
+      browser = await firefox.launch(options);
+    } else if (projectConfig.name?.startsWith('webkit')) {
+      browser = await webkit.launch(options);
+    } else {
+      throw new Error(`Unsupported browser: ${projectConfig.name}`);
     }
+    // switch (projectConfig.name) {
+    //   case 'chromium':
+    //     browser = await chromium.launch(options);
+    //     break;
+    //   case 'firefox':
+    //     browser = await firefox.launch(options);
+    //     break;
+    //   case 'webkit':
+    //     browser = await webkit.launch(options);
+    //     break;
+    //   default:
+    //     throw new Error(`Unsupported browser: ${projectConfig.name}`);
+    // }
     return browser;
   }
 }

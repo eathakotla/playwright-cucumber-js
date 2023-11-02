@@ -49,3 +49,9 @@ Feature: logging into policy center
     And user able to see "Enter Account Information" form elements
     And user creates account with "California" state address
     And user waits for 2000 milli seconds
+    Given user opens policycenter
+    And user starts new Account
+    And user is on "Enter Account Information" page in policycenter
+    And user able to see "Enter Account Information" form elements
+    And user creates account with "California" state address
+    And user waits for 2000 milli seconds
