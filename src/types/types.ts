@@ -5,6 +5,7 @@ export type TestConfig = {
   environments: environment[];
   environment: string;
   browser_project: string;
+  trace: boolean;
 };
 
 export type environment = {

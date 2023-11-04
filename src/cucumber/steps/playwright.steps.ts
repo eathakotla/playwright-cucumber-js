@@ -1,11 +1,12 @@
 import { DataTable, Given, Then, When } from '@cucumber/cucumber';
-import { expects } from 'playwright/expects';
-import { CustomWorld } from 'cucumber/steps/customWorld';
 import { columnToArray } from 'cucumber/data-utils';
-import { WebComponent } from 'playwright/helpers';
+import { CustomWorld } from 'cucumber/steps/customWorld';
+import { WebComponent } from 'playwright/component';
+import { expects } from 'playwright/expects';
 import { getPage } from 'playwright/page-utils';
 
-Given('user opens url {string}', async function (url: string) {
+Given('user opens url {string}', async function (this: CustomWorld, url: string) {
+  await this.launchPage();
   await getPage().goto(url);
 });
 

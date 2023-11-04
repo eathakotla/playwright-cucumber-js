@@ -1,6 +1,6 @@
 import { Locator } from '@playwright/test';
+import { WebComponent } from 'playwright/component';
 import { softExpect } from 'playwright/helpers';
-import { WebComponent } from 'playwright/helpers';
 
 export class TableComponent extends WebComponent {
   constructor(locator: string, alias?: string) {

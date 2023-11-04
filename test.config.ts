@@ -5,7 +5,6 @@ export const LOADSTATE: WaitForLoadStateOptions = 'domcontentloaded';
 
 export const config: TestConfig = {
   playwrightConfig: defineConfig({
-    // globalTimeout: 30000,
     expect: {
       timeout: 30000,
     },
@@ -36,6 +35,7 @@ export const config: TestConfig = {
   }),
   environment: 'qa',
   browser_project: process.env.BROWSER ? process.env.BROWSER : 'chromium',
+  trace: false,
   environments: [
     {
       name: 'qa',

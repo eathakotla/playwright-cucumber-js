@@ -1,11 +1,12 @@
-import { Given, When, Then } from '@cucumber/cucumber';
-import { PolicyCenterPages } from 'pages/policycenter/pages';
+import { Given, Then, When } from '@cucumber/cucumber';
 import { CustomWorld } from 'cucumber/steps/customWorld';
+import { PolicyCenterPages } from 'pages/policycenter/pages';
 import { logger } from 'src/setup/logger';
 
 let pc = new PolicyCenterPages();
 
-Given('user opens policycenter', async function () {
+Given('user opens policycenter', async function (this: CustomWorld) {
+  await this.launchPage();
   await pc.base().openPolicyCenter();
 });
 

@@ -1,6 +1,7 @@
 import { faker } from '@faker-js/faker';
+import { WebComponent } from 'playwright/component';
 import { expects } from 'playwright/expects';
-import { WebComponent, createComponent, getComponents } from 'playwright/helpers';
+import { createComponent, getComponents } from 'playwright/helpers';
 import { v10 } from 'playwright/templates';
 import { address } from 'tests/data/data-types';
 

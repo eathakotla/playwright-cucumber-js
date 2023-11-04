@@ -14,6 +14,7 @@
     "prepare": "husky install",
     "cucumber-test": "cucumber-js test",
     "cucumber": "cucumber-js",
+    "debug-cucumber": "set PWDEBUG=1 & set DEBUG=pw:api & npx cucumber-js",
     "generate-components": "src/setup/generator.ts"
   },
   "keywords": [
@@ -28,9 +29,11 @@
     "@cucumber/cucumber": "^10.0.0",
     "@cucumber/pretty-formatter": "^1.0.0",
     "@faker-js/faker": "^8.2.0",
+    "@types/fs-extra": "^11.0.3",
     "fast-xml-parser": "^4.3.2",
     "multiple-cucumber-html-reporter": "^3.5.0",
-    "winston": "^3.11.0"
+    "winston": "^3.11.0",
+    "fs-extra": "^11.1.1"
   },
   "devDependencies": {
     "@playwright/test": "^1.39.0",

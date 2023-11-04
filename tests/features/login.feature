@@ -38,7 +38,7 @@ Feature: logging into policy center
     When user is on "Login" page in policycenter
     And user prints all the elements of the page
 
-  @form-assertion
+  @form-assertion @trace
   Scenario: form assertion
     Given user opens policycenter
     And user is on "Login" page in policycenter

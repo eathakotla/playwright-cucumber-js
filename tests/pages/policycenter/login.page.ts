@@ -1,4 +1,5 @@
-import { WebComponent, createComponent, getComponents } from 'playwright/helpers';
+import { WebComponent } from 'playwright/component';
+import { createComponent, getComponents } from 'playwright/helpers';
 import { v10 } from 'playwright/templates';
 
 export class LoginPage {

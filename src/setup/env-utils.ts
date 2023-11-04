@@ -1,5 +1,5 @@
-import { config } from 'test.config';
 import { application, environment } from 'custom-types/types';
+import { config } from 'test.config';
 
 export function getEnvironment(): environment {
   const envString: string = config.environment;
@@ -23,4 +23,13 @@ export function getAppDetails(name: string): application {
     throw new Error('unable to find application with name : ' + name);
   }
   return app;
+}
+
+export function getProjectDetails() {
+  let projectConfig: any = config.browser_project
+    ? config.playwrightConfig.projects?.find((project) => {
+        return project.name === config.browser_project;
+      })
+    : config.playwrightConfig.projects?.at(0);
+  return projectConfig;
 }

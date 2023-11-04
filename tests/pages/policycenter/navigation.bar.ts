@@ -1,7 +1,7 @@
-import { WebComponent, createComponent, getComponents } from 'playwright/helpers';
+import { WebComponent } from 'playwright/component';
 import { expects } from 'playwright/expects';
+import { createComponent, expect, getComponents } from 'playwright/helpers';
 import { v10 } from 'playwright/templates';
-import { expect } from 'playwright/helpers';
 
 export class NavigationBar {
   accountTab: WebComponent = createComponent(v10.navTab('Account'), { alias: 'Account tab' });
